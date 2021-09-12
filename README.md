@@ -30,7 +30,7 @@ Benchmark - insert and search of element in linked and skip list
 -------------------------------------------------------------------------------
 /Users/vedrana/Desktop/skipList/test/testSkipList.cpp:135
 ...............................................................................
-
+<pre>
 benchmark name                       samples       iterations    estimated
                                      mean          low mean      high mean
                                      std dev       low std dev   high std dev
@@ -42,7 +42,6 @@ Insert one element in skip list                100            77    10.4412 ms
 Insert one element in linked list              100          1089    10.3455 ms
                                         92.6299 ns    91.4913 ns    94.6685 ns
                                         7.51313 ns    4.74313 ns    11.6833 ns
-
 
 
 Search one element in skip list of
@@ -66,6 +65,6 @@ of 100000 element                              100             1     1.77054 s
                                          18.2395 ms    17.9913 ms    18.6135 ms
                                          1.5291 ms    1.11387 ms    2.00928 ms
 
-
+</pre>
 As expected, insert is shorter in linked list, but search, and also erase,
 are shorter for skip list.
