@@ -6,9 +6,9 @@ ExternalProject_Add(
           git_catch
           PREFIX ${CMAKE_BINARY_DIR}/catch2
           GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+          GIT_TAG        v2.13.1
           GIT_SHALLOW 1
           TIMEOUT 10
-          UPDATE_COMMAND ${GIT_EXECUTABLE} pull
           CONFIGURE_COMMAND ""
           BUILD_COMMAND ""
           INSTALL_COMMAND ""
@@ -43,6 +43,8 @@ if(TARGET git_catch)
 # If cloning, make sure it's cloned BEFORE it's needed.
 add_dependencies(catch git_catch)
 endif()
+
+include_directories(${SkipList_SOURCE_DIR}/impl)
 
 add_executable(tests
               catchMain.cpp
