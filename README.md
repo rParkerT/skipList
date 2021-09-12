@@ -9,6 +9,7 @@ Catch2 repo from GitHub (https://github.com/catchorg/Catch2)
 is pulled in local project skipList. Doxygen is used for project documentation.
 
 To build project and project documentation, go to root directory:
+<pre>
 $ cd root
 $ mkdir build
 $ cd build
@@ -19,7 +20,7 @@ $ make doc
 To run tests:
 $ cd test
 $ ./tests
-
+</pre>
 To check valgrind: valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./tests
 To check coverage: gcov-10 testSkipList.cpp.gcno
 
