@@ -131,22 +131,59 @@ TEST_CASE("Skip List Insert TestClass") {
   //  REQUIRE(sList.searchNode(a) == true);
 }
 
-// SkipList and LinkedList benchmark comparison for insert of one element and
-// 100000 elements, and search and erase of element in lists of 100000 elements
-TEST_CASE("Benchmark - insert and search of element in linked and skip list ") {
+TEST_CASE("Insert into linked list, search and erase nodes") {
+  list::LinkedList<int> lList;
+  for (int i = 0; i < 1000; ++i) {
+    lList.insertNode(i);
+  }
+  for (int i = 0; i < 1000; ++i) {
+    REQUIRE(lList.searchNode(i) == true);
+  }
+  lList.insertNode(1000);
+
+  REQUIRE(lList.searchNode(1000) == true);
+  REQUIRE(lList.searchNode(2100) == false);
+  REQUIRE(lList.searchNode(1) == true);
+  lList.eraseNode(1);
+  lList.eraseNode(2);
+  lList.eraseNode(2222);
+  lList.eraseNode(-20);
+  lList.eraseNode(333);
+
+  REQUIRE(lList.searchNode(1000) == true);
+  REQUIRE(lList.searchNode(1) == false);
+  REQUIRE(lList.searchNode(2) == false);
+  REQUIRE(lList.searchNode(333) == false);
+}
+
+// SkipList and LinkedList benchmark comparison for insert of 100 elements
+TEST_CASE("Benchmark - insert of elements in linked and skip list ") {
   list::SkipList<int> sList;
 
-  BENCHMARK("Insert one element in skip list") { return sList.insertNode(-1); };
+  BENCHMARK("Insert 100 element in skip list") {
+    for (int i = 0; i < 100; ++i) {
+      sList.insertNode(i);
+    }
+  };
 
   list::LinkedList<int> lList;
-  BENCHMARK("Insert one element in linked list") {
-    return lList.insertNode(-1);
+  BENCHMARK("Insert 100 element in linked list") {
+    for (int i = 0; i < 100; ++i) {
+      lList.insertNode(i);
+    }
   };
+}
+
+// SkipList and LinkedList benchmark comparison for insert search and erase of
+// element in lists of 100000 elements
+TEST_CASE("Benchmark - search and erase of element in linked and skip list ") {
+  list::SkipList<int> sList;
 
   for (int i = 0; i < 100000; ++i) {
     sList.insertNode(i);
   }
 
+  list::LinkedList<int> lList;
   for (int i = 0; i < 100000; ++i) {
     lList.insertNode(i);
   }
