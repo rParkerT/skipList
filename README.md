@@ -25,47 +25,56 @@ To check valgrind: valgrind --tool=memcheck --leak-check=full --show-leak-kinds=
 To check coverage: gcov-10 testSkipList.cpp.gcno
 
 Benchmark results:
-
--------------------------------------------------------------------------------
-Benchmark - insert and search of element in linked and skip list
--------------------------------------------------------------------------------
-/Users/vedrana/Desktop/skipList/test/testSkipList.cpp:135
-...............................................................................
 <pre>
+-------------------------------------------------------------------------------
+Benchmark - insert of elements in linked and skip list
+-------------------------------------------------------------------------------
+...............................................................................
+
 benchmark name                       samples       iterations    estimated
                                      mean          low mean      high mean
                                      std dev       low std dev   high std dev
 -------------------------------------------------------------------------------
-Insert one element in skip list                100            77    10.4412 ms
-                                        1.40681 us    1.37992 us    1.47343 us
-                                        200.392 ns    66.6338 ns    364.574 ns
+Insert 100 element in skip list                100             1    17.8937 ms
+                                        180.507 us    177.927 us    186.457 us
+                                        18.7549 us    9.66014 us    36.4911 us
 
-Insert one element in linked list              100          1089    10.3455 ms
-                                        92.6299 ns    91.4913 ns    94.6685 ns
-                                        7.51313 ns    4.74313 ns    11.6833 ns
+Insert 100 element in linked list              100             1    229.881 ms
+                                        5.07832 ms    4.84784 ms    5.31391 ms
+                                         1.1898 ms    1.09066 ms    1.30104 ms
 
 
-Search one element in skip list of
-100000 elements
+-------------------------------------------------------------------------------
+Benchmark - search and erase of element in linked and skip list
+-------------------------------------------------------------------------------
+...............................................................................
 
-                                        4.07136 us    3.35856 us    5.86336 us
-                                        5.01957 us    213.914 ns     9.2014 us
+benchmark name                       samples       iterations    estimated
+                                     mean          low mean      high mean
+                                     std dev       low std dev   high std dev
+-------------------------------------------------------------------------------
+Search one element in skip list of                                             
+100000 elements                      
+                                        4.09596 us    3.37509 us    7.02422 us
+                                        6.44995 us    1.23271 us    15.0965 us
 
-Search one element in linked list
-of 100000 element                              100             2    12.0076 ms
-                                        75.042 us     63.637 us    131.292 us
-                                       112.129 us     2.0257 us    267.535 us
+Search one element in linked list                                              
+of 100000 element                              100             1    35.6833 ms
+                                        348.197 us    340.187 us    357.677 us
+                                        44.4439 us     38.529 us    50.7627 us
 
-Erase of one element in skip list
-of 100000 elements                             100            45     10.575 ms
-                                       2.47298 us    2.41253 us     2.5932 us
-                                       416.367 ns    246.566 ns    703.115 ns
+Erase of one element in skip list                                              
+of 100000 elements                             100            50      10.73 ms
+                                        2.95974 us    2.79894 us    3.23794 us
+                                        1.05164 us    704.315 ns    1.81654 us
 
-Erase of one element in linked list
-of 100000 element                              100             1     1.77054 s
-                                         18.2395 ms    17.9913 ms    18.6135 ms
-                                         1.5291 ms    1.11387 ms    2.00928 ms
+Erase of one element in linked list                                            
+of 100000 element                              100             1     42.764 ms
+                                        436.727 us    426.697 us    449.237 us
+                                        56.6339 us    48.2948 us    68.9935 us
 
 </pre>
-As expected, insert is shorter in linked list, but search, and also erase,
-are shorter for skip list.
+
+Since the search is more efficient in skip list, that is why all the operations are
+faster for skip list. To make insert more efficient in linked list, ordering should be removed,
+but that would make search even more slower.
