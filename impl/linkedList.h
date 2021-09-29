@@ -22,11 +22,11 @@ private:
    *
    * Each Node carries a key and a pointer to next Node.
    *
-   * @tparam T data type of key in Node
+   * @tparam V data type of key in Node
    */
-  template <typename T> struct Node {
-    T value;       ///< key value of Node
-    Node<T> *next; ///< pointer to next Node in Linked List
+  struct Node {
+    V value;    ///< key value of Node
+    Node *next; ///< pointer to next Node in Linked List
 
     /**
      * Node constructor.
@@ -34,13 +34,13 @@ private:
      *
      * @tparam T data type of key in Node
      */
-    explicit Node(T v) : value(v), next(nullptr) {}
+    explicit Node(V v) : value(v), next(nullptr) {}
   };
 
   /**
    * Head Node's value is the smallest value of each Node in Linked List.
    */
-  Node<V> *head = nullptr;
+  Node *head = nullptr;
 
   /**
    * Adds Node to Linked List
@@ -49,7 +49,7 @@ private:
    *
    * @return Node with set value
    */
-  Node<V> *addNode(V value) { return new Node<V>(value); }
+  Node *addNode(V value) { return new Node(value); }
 
 public:
   /**
@@ -80,9 +80,7 @@ public:
    *
    * Nodes are inserted in order, from the lowest to the highest key value. All
    * links for Node that's to be inserted are fetched. Pointer of predecessor
-   * and new Node, and new Node and next Node is connected. If the list is
-   * empty, Node is inserted as head Node. If the value of new Node is smaller
-   * then the value of head Node, new Node is set as head Node.
+   * and new Node, and new Node and next Node is connected.
    *
    * @tparam V newValue key value of Node
    *
@@ -115,11 +113,11 @@ public:
 
 template <typename V> LinkedList<V>::LinkedList() {
   V valueMin = std::numeric_limits<V>::min();
-  head = new Node<V>(valueMin);
+  head = new Node(valueMin);
 }
 
 template <typename V> LinkedList<V>::~LinkedList() {
-  Node<V> *current = head;
+  Node *current = head;
   while (current) {
     head = current->next;
     delete current;
@@ -128,10 +126,10 @@ template <typename V> LinkedList<V>::~LinkedList() {
 }
 
 template <typename V> void LinkedList<V>::insertNode(V newValue) {
-  Node<V> *tempNode, *newNode;
+  Node *tempNode, *newNode;
   newNode = addNode(newValue);
   tempNode = head;
-  if (tempNode->next != nullptr && tempNode->next->value < newValue) {
+  while (tempNode->next != nullptr && tempNode->next->value < newValue) {
     tempNode = tempNode->next;
   }
   newNode->next = tempNode->next;
@@ -139,7 +137,7 @@ template <typename V> void LinkedList<V>::insertNode(V newValue) {
 }
 
 template <typename V> bool LinkedList<V>::eraseNode(V newValue) {
-  Node<V> *tempNode, *prevNode;
+  Node *tempNode, *prevNode;
   tempNode = head;
   while (tempNode != nullptr && tempNode->value != newValue) {
     prevNode = tempNode;
@@ -156,7 +154,7 @@ template <typename V> bool LinkedList<V>::eraseNode(V newValue) {
 }
 
 template <typename V> const bool LinkedList<V>::searchNode(V value) {
-  Node<V> *tempNode = head;
+  Node *tempNode = head;
   while (tempNode != nullptr) {
     if (tempNode->value == value) {
       return true;
@@ -167,3 +165,4 @@ template <typename V> const bool LinkedList<V>::searchNode(V value) {
 }
 
 } // namespace list
+
